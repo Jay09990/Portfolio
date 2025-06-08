@@ -89,7 +89,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-950 relative overflow-hidden" ref={aboutRef}>
+    <section id="about" className="py-5 bg-gray-950 relative overflow-hidden" ref={aboutRef}>
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-40 right-20 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl"></div>

@@ -54,7 +54,7 @@ const Header = () => {
             <div className="flex-shrink-0">
               <a 
                 href="#home" 
-                className="text-2xl lg:text-3xl font-bold text-white hover:text-gray-300 transition-colors duration-200"
+                className="text-2xl lg:text-3xl font-bold text-white hover:text-gray-300 transiti on-colors duration-200"
                 onClick={() => handleNavClick('home')}
               >
                 <span className="text-white">D</span>

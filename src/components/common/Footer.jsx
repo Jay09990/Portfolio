@@ -46,7 +46,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-white font-bold text-xl">Your Name</h3>
+            <span className="text-white font-bold text-xl">Jay</span><span className="text-orange-400 font-bold text-xl"> Dudhrejiya</span>
             <p className="text-gray-400 text-sm max-w-md">
               Full Stack Developer passionate about creating amazing digital experiences 
               using modern technologies and best practices.
@@ -104,7 +104,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-gray-400 text-sm">
-            © {currentYear} Your Name. All rights reserved.
+            © {currentYear} Jay Dudhrejiya. All rights reserved.
           </p>
           <p className="text-gray-400 text-sm flex items-center space-x-1">
             <span>Made with</span>

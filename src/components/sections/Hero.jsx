@@ -5,10 +5,10 @@ import { ChevronDown, Github, Linkedin, Mail, Download, Code, Palette, Zap } fro
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const roles = [
     "Full Stack Developer",
-    "MERN Stack Expert", 
+    "MERN Stack Expert",
     "UI/UX Enthusiast",
     "Problem Solver"
   ];
@@ -49,10 +49,10 @@ const Hero = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20">
-          
+
           {/* Left Content */}
           <div className={`lg:w-1/2 text-center lg:text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            
+
             {/* Greeting */}
             <div className="flex items-center justify-center lg:justify-start mb-4">
               <div className="w-8 h-[2px] bg-orange-500 mr-4"></div>
@@ -77,7 +77,7 @@ const Hero = () => {
 
             {/* Description */}
             <p className="text-gray-400 text-lg lg:text-xl mb-8 max-w-2xl leading-relaxed">
-              Passionate about creating exceptional digital experiences with modern web technologies. 
+              Passionate about creating exceptional digital experiences with modern web technologies.
               I transform ideas into scalable, user-friendly applications using the MERN stack.
             </p>
 
@@ -99,18 +99,20 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-              <button 
+              <button
                 onClick={() => scrollToSection('projects')}
                 className="group px-8 py-4 bg-orange-500 text-black font-semibold rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25"
               >
                 View My Work
                 <ChevronDown className="w-5 h-5 inline-block ml-2 group-hover:translate-y-1 transition-transform" />
               </button>
-              
-              <button className="group px-8 py-4 border-2 border-orange-500 text-orange-500 font-semibold rounded-full hover:bg-orange-500 hover:text-black transition-all duration-300 transform hover:scale-105">
-                <Download className="w-5 h-5 inline-block mr-2 group-hover:animate-bounce" />
-                Download CV
-              </button>
+
+              <a href="/Docs/Dudchrejiya_Jay.pdf" download>
+                <button className="group px-8 py-4 border-2 border-orange-500 text-orange-500 font-semibold rounded-full hover:bg-orange-500 hover:text-black transition-all duration-300 transform hover:scale-105">
+                  <Download className="w-5 h-5 inline-block mr-2 group-hover:animate-bounce" />
+                  Download CV
+                </button>
+              </a>
             </div>
 
             {/* Social Links */}
@@ -131,20 +133,24 @@ const Hero = () => {
           {/* Right Content - Profile Image/Animation */}
           <div className={`lg:w-1/2 mt-12 lg:mt-0 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className="relative max-w-md mx-auto">
-              
+
               {/* Main Profile Container */}
               <div className="relative">
                 {/* Animated Border */}
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 p-1 animate-spin-slow">
                   <div className="w-full h-full bg-black rounded-full"></div>
                 </div>
-                
+
                 {/* Profile Image */}
                 <div className="relative z-10 w-80 h-80 mx-auto rounded-full overflow-hidden border-4 border-orange-500/20">
                   <div className="w-full h-full bg-gradient-to-br from-orange-200 to-orange-300 flex items-center justify-center">
                     {/* Placeholder - Replace with your image */}
-                    <div className="text-6xl text-orange-500">
-                      <img src="../../src/assets/images/profilePhoto.jpg" alt="profile pic" />
+                    <div className="w-78 h-78 rounded-full bg-gradient-to-tr from-orange-500 to-orange-300 flex items-center justify-center mx-auto shadow-lg">
+                      <img
+                        src="/images/profilePhoto.jpg"
+                        alt="My Profile"
+                        className="w-75 h-75 rounded-full object-cover border-4 border-white"
+                      />
                     </div>
                   </div>
                 </div>
@@ -153,11 +159,11 @@ const Hero = () => {
                 <div className="absolute -top-4 -right-4 w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center border border-orange-500/20 animate-bounce">
                   <span className="text-2xl">⚛️</span>
                 </div>
-                
+
                 <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center border border-orange-500/20 animate-bounce delay-500">
                   <span className="text-2xl">🚀</span>
                 </div>
-                
+
                 <div className="absolute top-1/2 -left-8 w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center border border-orange-500/20 animate-pulse">
                   <span className="text-lg">💡</span>
                 </div>
@@ -184,7 +190,7 @@ const Hero = () => {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <button 
+          <button
             onClick={() => scrollToSection('about')}
             className="flex flex-col items-center text-gray-400 hover:text-orange-500 transition-colors"
           >
