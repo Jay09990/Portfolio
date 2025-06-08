@@ -23,10 +23,6 @@ This site showcases my projects, skills, and experience as a developer.
 - **Backend:** (If applicable) Node.js, Express.js, MongoDB
 - **Deployment:** Vercel
 
-## 📸 Screenshots
-
-![Portfolio Screenshot](https://your-screenshot-link.com)
-
 ## 🚧 Getting Started
 
 1. **Clone the repo:**
