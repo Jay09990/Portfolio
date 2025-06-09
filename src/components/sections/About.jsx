@@ -34,7 +34,7 @@ const About = () => {
 
   // Counter animation - Fixed targets
   const animateCounters = () => {
-    const targets = { projects: 12, coffee: 500 }; // Fixed: removed undefined 'clients'
+    const targets = { projects: 2, coffee: 500 }; // Fixed: removed undefined 'clients'
     const duration = 2000;
     const steps = 60;
     const stepDuration = duration / steps;

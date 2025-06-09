@@ -32,7 +32,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center">
+    <section className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center" id='hero'>
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>

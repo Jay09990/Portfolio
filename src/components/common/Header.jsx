@@ -53,9 +53,9 @@ const Header = () => {
             {/* Logo/Brand */}
             <div className="flex-shrink-0">
               <a 
-                href="#home" 
+                href="#hero" 
                 className="text-2xl lg:text-3xl font-bold text-white hover:text-gray-300 transiti on-colors duration-200"
-                onClick={() => handleNavClick('home')}
+                onClick={() => handleNavClick('hero')}
               >
                 <span className="text-white">D</span>
                 <span className="text-orange-500">J</span>

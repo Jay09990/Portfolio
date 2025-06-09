@@ -103,7 +103,7 @@ const Projects = () => {
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="flex items-center justify-center mb-4">
             <div className="w-12 h-[2px] bg-orange-500 mr-4"></div>
-            <span className="text-orange-500 font-medium tracking-wide uppercase">Portfolio</span>
+            <span className="text-orange-500 font-medium tracking-wide uppercase">MY PROJECTS</span>
             <div className="w-12 h-[2px] bg-orange-500 ml-4"></div>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
