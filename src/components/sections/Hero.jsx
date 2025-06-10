@@ -26,8 +26,8 @@ const Hero = () => {
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Github, href: "https://github.com/Jay09990", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/in/jDudhrejiya090", label: "LinkedIn" },
     { icon: Mail, href: "mailto:your@email.com", label: "Email" }
   ];
 

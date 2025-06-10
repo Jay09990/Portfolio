@@ -19,7 +19,7 @@ const About = () => {
           animateCounters();
         }
       },
-      { 
+      {
         threshold: 0.1, // Reduced threshold for mobile
         rootMargin: '0px 0px -50px 0px' // Added margin for better mobile detection
       }
@@ -43,7 +43,7 @@ const About = () => {
     const timer = setInterval(() => {
       currentStep++;
       const progress = currentStep / steps;
-      
+
       setCounters({
         projects: Math.floor(targets.projects * progress),
         coffee: Math.floor(targets.coffee * progress)
@@ -60,7 +60,7 @@ const About = () => {
     {
       category: "Frontend",
       icon: Globe,
-      technologies: ["React.js", "Next.js", "JavaScript", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
+      technologies: ["React.js", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
       color: "from-blue-500 to-cyan-500"
     },
     {
@@ -91,9 +91,9 @@ const About = () => {
   ];
 
   return (
-    <section 
-      id="about" 
-      className="py-16 sm:py-20 lg:py-25 bg-gray-950 relative overflow-hidden min-h-screen" 
+    <section
+      id="about"
+      className="py-16 sm:py-20 lg:py-25 bg-gray-950 relative overflow-hidden min-h-screen"
       ref={aboutRef}
     >
       {/* Background Elements - Adjusted for mobile */}
@@ -103,7 +103,7 @@ const About = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header - Mobile optimized */}
         <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="flex items-center justify-center mb-4">
@@ -115,13 +115,13 @@ const About = () => {
             Crafting Digital <span className="text-orange-500">Experiences</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-3xl mx-auto px-4">
-            Passionate full-stack developer with expertise in modern web technologies, 
+            Passionate full-stack developer with expertise in modern web technologies,
             dedicated to creating scalable and user-friendly applications.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 sm:mb-20">
-          
+
           {/* Left Content - Story - Mobile optimized */}
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="space-y-6">
@@ -131,17 +131,17 @@ const About = () => {
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">My Journey</h3>
                   <div className="space-y-4 text-gray-300 text-base sm:text-lg leading-relaxed">
                     <p>
-                      Hello! I'm a passionate full-stack developer specializing in the MERN stack. 
-                      My journey in web development started 2+ years ago, and I've been fascinated 
+                      Hello! I'm a passionate full-stack developer specializing in the MERN stack.
+                      My journey in web development started 2+ years ago, and I've been fascinated
                       by the endless possibilities of creating digital solutions that make a difference.
                     </p>
                     <p>
-                      I believe in writing clean, efficient code and creating intuitive user experiences. 
-                      My approach combines technical expertise with creative problem-solving to deliver 
+                      I believe in writing clean, efficient code and creating intuitive user experiences.
+                      My approach combines technical expertise with creative problem-solving to deliver
                       applications that not only work flawlessly but also delight users.
                     </p>
                     <p>
-                      When I'm not coding, you'll find me exploring new technologies, contributing to 
+                      When I'm not coding, you'll find me exploring new technologies, contributing to
                       open-source projects, or sharing knowledge with the developer community.
                     </p>
                   </div>
@@ -151,7 +151,7 @@ const About = () => {
               {/* Achievements - Mobile optimized */}
               <div className="grid gap-4 mt-8">
                 {achievements.map((achievement, index) => (
-                  <div 
+                  <div
                     key={index}
                     className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-900/30 rounded-lg border border-gray-800 hover:border-orange-500/30 transition-all duration-300"
                   >
@@ -188,7 +188,7 @@ const About = () => {
                 <h4 className="text-white font-semibold text-sm sm:text-base">Fun Fact</h4>
               </div>
               <p className="text-gray-300 text-sm sm:text-base">
-                I've debugged more code at 2 AM than during regular hours, and I consider 
+                I've debugged more code at 2 AM than during regular hours, and I consider
                 coffee an essential part of my development stack! ☕
               </p>
             </div>
@@ -208,26 +208,26 @@ const About = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {skills.map((skill, index) => (
-              <div 
+              <div
                 key={index}
                 className="group relative bg-gray-900/30 rounded-xl p-4 sm:p-6 border border-gray-800 hover:border-orange-500/30 transition-all duration-300 hover:transform hover:scale-105"
               >
                 {/* Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300`}></div>
-                
+
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="w-12 sm:w-14 h-12 sm:h-14 bg-orange-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
                     <skill.icon className="w-6 sm:w-7 h-6 sm:h-7 text-orange-500" />
                   </div>
-                  
+
                   {/* Category */}
                   <h4 className="text-lg sm:text-xl font-bold text-white mb-3">{skill.category}</h4>
-                  
+
                   {/* Technologies */}
                   <div className="space-y-2">
                     {skill.technologies.map((tech, techIndex) => (
-                      <div 
+                      <div
                         key={techIndex}
                         className="inline-block bg-gray-800/50 px-2 sm:px-3 py-1 rounded-full mr-1 sm:mr-2 mb-2"
                       >
@@ -248,10 +248,10 @@ const About = () => {
               Ready to Work Together?
             </h3>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              I'm always excited to take on new challenges and collaborate on innovative projects. 
+              I'm always excited to take on new challenges and collaborate on innovative projects.
               Let's discuss how we can bring your ideas to life!
             </p>
-            <button 
+            <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               className="group px-6 sm:px-8 py-3 sm:py-4 bg-orange-500 text-black font-semibold rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25 text-sm sm:text-base"
             >
