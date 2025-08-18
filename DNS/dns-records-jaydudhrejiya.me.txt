@@ -1,4 +1,0 @@
-; DNS Records for jaydudhrejiya.me
-; Add these records to your DNS provider's configuration
-@    IN    A    216.198.79.193
-www    IN    CNAME    fcab51f314a9cf72.vercel-dns-017.com
