@@ -51,8 +51,7 @@ This site showcases my projects, skills, and experience as a developer.
 [View Portfolio Live]([https://your-portfolio.vercel.app](https://portfolio-theta-olive-36.vercel.app/#))
 
 ## 📬 Contact
-your.email@example.com
-- **Email:** jdudhrejiya0990@gmail.com
+- **Email:** [jdudhrejiya0990@gmail.com](jdudhrejiya0990@gmail.com)
 - **LinkedIn:** [Your LinkedIn](https://linkedin.com/in/jdudhrejiya090)
 - **GitHub:** [Your GitHub](https://github.com/Jay09990)
 
