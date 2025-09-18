@@ -51,10 +51,10 @@ This site showcases my projects, skills, and experience as a developer.
 [View Portfolio Live](https://your-portfolio.vercel.app)
 
 ## 📬 Contact
-
-- **Email:** your.email@example.com
-- **LinkedIn:** [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- **GitHub:** [Your GitHub](https://github.com/yourusername)
+your.email@example.com
+- **Email:** jdudhrejiya0990@gmail.com
+- **LinkedIn:** [Your LinkedIn](https://linkedin.com/in/jdudhrejiya090)
+- **GitHub:** [Your GitHub](https://github.com/Jay09990)
 
 ---
 
