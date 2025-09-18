@@ -48,7 +48,7 @@ This site showcases my projects, skills, and experience as a developer.
 
 ## 🌐 Live Demo
 
-[View Portfolio Live]([https://your-portfolio.vercel.app](https://portfolio-theta-olive-36.vercel.app/)
+[View Portfolio Live](https://portfolio-theta-olive-36.vercel.app/)
 
 ## 📬 Contact
 - **Email:** [jdudhrejiya0990@gmail.com](jdudhrejiya0990@gmail.com)
