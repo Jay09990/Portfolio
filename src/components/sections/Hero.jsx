@@ -1,300 +1,249 @@
-import React, { useState, useEffect } from "react";
-import {
-  ChevronDown,
-  Github,
-  Linkedin,
-  Mail,
-  Download,
-  Code,
-  Palette,
-  Zap,
-} from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+
+// Import images (or just reference paths if in public)
+const heroImages = [
+  "/images/hero-1.jpg",
+  "/images/hero-2.jpg",
+  "/images/hero-3.jpg",
+  "/images/hero-4.jpg",
+  "/images/hero-5.jpg",
+  "/images/hero-6.jpg",
+  "/images/hero-7.jpg",
+];
 
 const Hero = () => {
-  const [currentRole, setCurrentRole] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
+  const textRef = useRef(null);
+  const imageWrapperRef = useRef(null); // New wrapper for parallax
+  const imageRef = useRef(null); // Inner image for glitch
+  const bgRef = useRef(null);
+  const [currentImgIdx, setCurrentImgIdx] = useState(0);
 
-  const roles = [
-    "Full Stack Developer",
-    "MERN Stack Expert",
-    "UI/UX Enthusiast",
-    "Problem Solver",
-  ];
-
+  // Slideshow Effect
   useEffect(() => {
-    setIsVisible(true);
     const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
+      // Glitch Effect
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.set(imageRef.current, { clearProps: "filter,transform" }); // Release control to CSS
+        }
+      });
+
+      tl.to(imageRef.current, {
+        filter: "grayscale(100%) contrast(200%) brightness(150%) blur(4px)",
+        scale: 1.05,
+        x: 5,
+        duration: 0.1,
+        ease: "rough({ template: none.out, strength: 1, points: 20, taper: none, randomize: true, clamp: false })",
+        yoyo: true,
+        repeat: 3
+      })
+        .add(() => {
+          // Change Image Randomly (but not same as current)
+          let nextIdx;
+          do {
+            nextIdx = Math.floor(Math.random() * heroImages.length);
+          } while (nextIdx === currentImgIdx);
+          setCurrentImgIdx(nextIdx);
+        })
+        .to(imageRef.current, {
+          filter: "grayscale(100%) contrast(100%) brightness(100%) blur(0px)",
+          scale: 1,
+          x: 0,
+          duration: 0.2,
+        });
+
+    }, 4000); // Change every 4 seconds
+
     return () => clearInterval(interval);
-  }, []);
+  }, [currentImgIdx]);
 
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    // Initial Reveal
+    tl.from(bgRef.current, {
+      opacity: 0,
+      duration: 1.5,
+      ease: "power2.inOut"
+    })
+      .fromTo(".hero-text-line",
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power4.out" },
+        "-=1"
+      )
+      .fromTo(imageWrapperRef.current, // Animate the wrapper
+        { scale: 1.1, opacity: 0, filter: "blur(10px)" },
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 1.5, ease: "power2.out" },
+        "-=1.2"
+      )
+      .fromTo(".hero-social",
+        { x: -20, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power2.out" },
+        "-=0.5"
+      );
+
+    // Mouse Parallax Effect
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5);
+      const yPos = (clientY / window.innerHeight - 0.5);
+
+      gsap.to(textRef.current, {
+        x: xPos * 30,
+        y: yPos * 30,
+        duration: 1,
+        ease: "power2.out"
+      });
+
+      gsap.to(imageWrapperRef.current, { // Move wrapper, not image directly
+        x: xPos * -20,
+        y: yPos * -20,
+        duration: 1.2,
+        ease: "power2.out"
+      });
+
+      gsap.to(".hero-bg-element", {
+        x: xPos * 50,
+        y: yPos * 50,
+        duration: 1.5,
+        ease: "power1.out"
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, { scope: containerRef });
+
+  const scrollToProjects = () => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
-
-  const socialLinks = [
-    { icon: Github, href: "https://github.com/Jay09990", label: "GitHub" },
-    {
-      icon: Linkedin,
-      href: "https://linkedin.com/in/jDudhrejiya090",
-      label: "LinkedIn",
-    },
-    { icon: Mail, href: "mailto:your@email.com", label: "Email" },
-  ];
 
   return (
     <section
-      className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center"
-      id="hero"
+      ref={containerRef}
+      className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center p-6"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-600/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-orange-500/5 to-orange-600/5 rounded-full blur-3xl animate-spin-slow"></div>
+      {/* Abstract Background */}
+      <div ref={bgRef} className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[70vw] h-[70vw] bg-neutral-900/30 rounded-full blur-[100px] hero-bg-element translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-orange-900/10 rounded-full blur-[80px] hero-bg-element -translate-x-1/3 translate-y-1/3" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
       </div>
 
-      {/* Floating Code Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 text-orange-500/20 text-6xl font-mono animate-float">
-          {"{ }"}
-        </div>
-        <div className="absolute top-3/4 right-1/4 text-orange-500/20 text-4xl font-mono animate-float-delayed">
-          {"< />"}
-        </div>
-        <div className="absolute top-1/2 right-1/3 text-orange-500/20 text-5xl font-mono animate-float-slow">
-          {"[]"}
-        </div>
-      </div>
+      <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full h-full">
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20">
-          {/* Left Content */}
-          <div
-            className={`lg:w-1/2 text-center lg:text-left transition-all duration-1000 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          >
-            {/* Greeting */}
-            <div className="flex items-center justify-center lg:justify-start mb-4">
-              <div className="w-8 h-[2px] bg-orange-500 mr-4"></div>
-              <span className="text-orange-500 font-medium tracking-wide">
-                Hello, I'm
-              </span>
-            </div>
+        {/* Left Content - Typography */}
+        <div ref={textRef} className="order-2 lg:order-1 flex flex-col justify-center">
+          <div className="overflow-hidden">
+            <h2 className="hero-text-line text-lg md:text-xl text-orange-500 tracking-[0.2em] font-medium uppercase mb-4">
+              Full Stack Developer
+            </h2>
+          </div>
 
-            {/* Name */}
-            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              <span className="block">Dudhrejiya Jay</span>
+          <div className="overflow-hidden">
+            <h1 className="hero-text-line text-5xl sm:text-7xl xl:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-2 mix-blend-difference">
+              JAY
             </h1>
+          </div>
 
-            {/* Dynamic Role */}
-            <div className="mb-8 h-16 flex items-center justify-center lg:justify-start">
-              <h2 className="text-2xl lg:text-3xl font-semibold text-gray-300">
-                I'm a{" "}
-                <span className="text-orange-500 relative">
-                  {roles[currentRole]}
-                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-500 animate-pulse"></div>
-                </span>
-              </h2>
-            </div>
+          <div className="overflow-hidden mb-8">
+            <h1 className="hero-text-line text-5xl sm:text-7xl xl:text-8xl font-black text-neutral-500 leading-[0.9] tracking-tighter">
+              DUDHREJIYA
+            </h1>
+          </div>
 
-            {/* Description */}
-            <p className="text-gray-400 text-lg lg:text-xl mb-8 max-w-2xl leading-relaxed">
-              Passionate about creating exceptional digital experiences with
-              modern web technologies. I transform ideas into scalable,
-              user-friendly applications using the MERN stack.
+          <div className="overflow-hidden mb-12 max-w-lg">
+            <p className="hero-text-line text-gray-400 text-lg leading-relaxed">
+              Crafting digital experiences with a focus on aesthetics and performance.
+              Turning complex problems into elegant, minimalist solutions.
             </p>
+          </div>
 
-            {/* Tech Stack Icons */}
-            <div className="flex items-center justify-center lg:justify-start gap-6 mb-8">
-              <div className="flex items-center gap-2 px-4 py-2 bg-gray-900/50 rounded-full border border-gray-800">
-                <Code className="w-5 h-5 text-orange-500" />
-                <span className="text-gray-300 text-sm font-medium">React</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-gray-900/50 rounded-full border border-gray-800">
-                <Zap className="w-5 h-5 text-orange-500" />
-                <span className="text-gray-300 text-sm font-medium">
-                  Node.js
-                </span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-gray-900/50 rounded-full border border-gray-800">
-                <Palette className="w-5 h-5 text-orange-500" />
-                <span className="text-gray-300 text-sm font-medium">
-                  MongoDB
-                </span>
-              </div>
-            </div>
+          {/* Socials & CTA */}
+          <div className="flex items-center gap-8">
+            <button
+              onClick={scrollToProjects}
+              className="hero-text-line group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-transform hover:scale-105"
+            >
+              <div className="absolute inset-0 bg-orange-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <span className="relative group-hover:text-white transition-colors duration-300 flex items-center gap-2">
+                Explore Work <ArrowDown className="w-4 h-4" />
+              </span>
+            </button>
 
-            {/* CTA Buttons */}
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="group px-8 py-4 bg-orange-500 text-black font-semibold rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25"
-              >
-                View My Work
-                <ChevronDown className="w-5 h-5 inline-block ml-2 group-hover:translate-y-1 transition-transform" />
-              </button>
-
-              <a href="/Docs/Dudchrejiya_Jay.pdf" download>
-                <button className="group px-8 py-4 border-2 border-orange-500 text-orange-500 font-semibold rounded-full hover:bg-orange-500 hover:text-black transition-all duration-300 transform hover:scale-105">
-                  <Download className="w-5 h-5 inline-block mr-2 group-hover:animate-bounce" />
-                  Download CV
-                </button>
-              </a>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex gap-4 justify-center lg:justify-start">
-              {socialLinks.map((social, index) => (
+            <div className="flex gap-4">
+              {[
+                { Icon: Github, href: "https://github.com/Jay09990" },
+                { Icon: Linkedin, href: "https://linkedin.com/in/jay-dudhrejiya" },
+                { Icon: Mail, href: "mailto:your@email.com" }
+              ].map(({ Icon, href }, i) => (
                 <a
-                  key={index}
-                  href={social.href}
-                  aria-label={social.label}
+                  key={i}
+                  href={href}
                   target="_blank"
-                  className="group w-12 h-12 border-2 border-gray-700 rounded-full flex items-center justify-center hover:border-orange-500 hover:bg-orange-500/10 transition-all duration-300 transform hover:scale-110"
+                  rel="noreferrer"
+                  className="hero-social p-3 rounded-full border border-white/10 text-white/60 hover:text-white hover:border-white hover:bg-white/5 transition-all duration-300"
                 >
-                  <social.icon className="w-5 h-5 text-gray-400 group-hover:text-orange-500 transition-colors" />
+                  <Icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Right Content - Profile Image/Animation */}
-          <div
-            className={`lg:w-1/2 mt-12 lg:mt-0 transition-all duration-1000 delay-300 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
-            }`}
-          >
-            <div className="relative max-w-md mx-auto">
-              {/* Main Profile Container */}
-              <div className="relative">
-                {/* Animated Border */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 p-0.5 animate-spin-slow">
-                  <div className="w-full h-full bg-black rounded-full"></div>
-                </div>
+        {/* Right Content - Retro Projector/Image */}
+        <div className="order-1 lg:order-2 flex justify-center items-center h-full relative">
+          <div ref={imageWrapperRef} className="relative w-full max-w-md group transition-all duration-500 ease-in-out">
 
-                {/* Profile Image */}
-                <div className="relative z-10 w-80 h-80 mx-auto rounded-full overflow-hidden border-4 border-orange-500/20">
-                  <div className="w-full h-full bg-gradient-to-br from-orange-200 to-orange-300 flex items-center justify-center">
-                    {/* Placeholder - Replace with your image */}
-                    <div className="w-78 h-78 rounded-full bg-gradient-to-tr from-orange-500 to-orange-300 flex items-center justify-center mx-auto shadow-lg">
-                      <img
-                        src="/images/profilePhoto.jpg"
-                        alt="My Profile"
-                        className="w-75 h-75 rounded-full object-cover border-4 border-white"
-                      />
-                    </div>
-                  </div>
-                </div>
+            {/* Artistic Frame */}
+            <div className="absolute inset-0 border border-white/10 translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 pointer-events-none" />
 
-                {/* Floating Tech Icons */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center border border-orange-500/20 animate-bounce">
-                  <span className="text-2xl">⚛️</span>
-                </div>
+            <div className="relative bg-gray-900 overflow-hidden">
+              {/* Image with Glitch Ref */}
+              <img
+                ref={imageRef}
+                src={heroImages[currentImgIdx]}
+                alt="Portrait"
+                className="relative w-full h-auto object-contain grayscale opacity-90 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+              />
 
-                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center border border-orange-500/20 animate-bounce delay-500">
-                  <span className="text-2xl">🚀</span>
-                </div>
+              {/* Film Grain / Noise Overlay */}
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
 
-                <div className="absolute top-1/2 -left-8 w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center border border-orange-500/20 animate-bounce delay-1000">
-                  <span className="text-lg">💡</span>
-                </div>
-              </div>
+              {/* Scanline Effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent bg-[length:100%_4px] opacity-20 pointer-events-none" />
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 mt-12">
-                <div className="text-center p-4 bg-gray-900/30 rounded-lg border border-gray-800">
-                  <div className="text-2xl font-bold text-orange-500">4</div>
-                  <div className="text-sm text-gray-400">Projects</div>
-                </div>
-                <div className="text-center p-4 bg-gray-900/30 rounded-lg border border-gray-800">
-                  <div className="text-2xl font-bold text-orange-500">2+</div>
-                  <div className="text-sm text-gray-400">Hackathon</div>
-                </div>
-                <div className="text-center p-4 bg-gray-900/30 rounded-lg border border-gray-800">
-                  <div className="text-2xl font-bold text-orange-500">100%</div>
-                  <div className="text-sm text-gray-400">Satisfied</div>
-                </div>
-              </div>
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
             </div>
+
+            {/* Corner Accents */}
+            <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-orange-500" />
+            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-orange-500" />
+
+            {/* Retro Label */}
+            <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-md px-2 py-1 border border-white/10 z-10">
+              <span className="text-[10px] text-orange-500 font-mono tracking-widest">IMG_0{currentImgIdx + 1}</span>
+            </div>
+
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <button
-            onClick={() => scrollToSection("about")}
-            className="flex flex-col items-center text-gray-400 hover:text-orange-500 transition-colors"
-          >
-            <span className="text-sm mb-2">Scroll Down</span>
-            <ChevronDown className="w-6 h-6" />
-          </button>
-        </div>
       </div>
 
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <div className="w-[1px] h-8 bg-white" />
+      </div>
 
-        @keyframes float-delayed {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-15px);
-          }
-        }
-
-        @keyframes float-slow {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        .animate-float-delayed {
-          animation: float-delayed 8s ease-in-out infinite;
-        }
-
-        .animate-float-slow {
-          animation: float-slow 10s ease-in-out infinite;
-        }
-
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
-        }
-      `}</style>
     </section>
   );
 };

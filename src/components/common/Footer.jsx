@@ -1,117 +1,75 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
-  const socialLinks = [
-    {
-      icon: <Github className="w-5 h-5" />,
-      href: "https://github.com/Jay09990",
-      label: "GitHub",
-      color: "hover:text-gray-400"
-    },
-    {
-      icon: <Linkedin className="w-5 h-5" />,
-      href: "https://linkedin.com/in/jDudhrejiya090",
-      label: "LinkedIn",
-      color: "hover:text-blue-400"
-    },
-    {
-      icon: <Mail className="w-5 h-5" />,
-      href: "mailto:jdudhrejiya0990@gmail.com",
-      label: "Email",
-      color: "hover:text-orange-400"
-    }
-  ];
 
-  const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
-  ];
-
-  const handleNavClick = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <footer className="bg-gray-900 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand Section */}
-          <div className="space-y-4">
-            <span className="text-white font-bold text-xl">Jay</span><span className="text-orange-400 font-bold text-xl"> Dudhrejiya</span>
-            <p className="text-gray-400 text-sm max-w-md">
-              Full Stack Developer passionate about creating amazing digital experiences 
-              using modern technologies and best practices.
-            </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`text-gray-400 ${social.color} transition-colors duration-300`}
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
+    <footer className="bg-black pt-20 pb-10 border-t border-gray-900">
+      <div className="container mx-auto px-6 md:px-12">
+
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20">
+          {/* Big Brand Name */}
+          <div>
+            <h2 className="text-[12vw] leading-none font-black text-white tracking-tighter mix-blend-difference select-none hover:text-orange-500 transition-colors duration-500 cursor-default">
+              DUDHREJIYA
+            </h2>
           </div>
 
-          {/* Quick Links */}
+          {/* Back to Top */}
+          <button
+            onClick={scrollToTop}
+            className="group flex items-center gap-2 mb-4 md:mb-10 hover:text-orange-500 transition-colors"
+          >
+            <span className="text-sm font-medium uppercase tracking-widest text-gray-500 group-hover:text-orange-500">Back to Top</span>
+            <div className="p-3 rounded-full border border-gray-800 group-hover:border-orange-500 group-hover:bg-orange-500 group-hover:text-black transition-all">
+              <ArrowUp className="w-5 h-5" />
+            </div>
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-t border-gray-900 pt-12">
+          {/* Section 1 */}
           <div className="space-y-4">
-            <h4 className="text-white font-semibold">Quick Links</h4>
+            <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Socials</h4>
             <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <button
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-gray-400 hover:text-orange-500 transition-colors duration-300 text-sm"
-                  >
-                    {link.name}
-                  </button>
-                </li>
-              ))}
+              <li><a href="https://linkedin.com/in/jay-dudhrejiya" target="_blank" rel="noreferrer" className="text-lg text-white hover:text-orange-500 transition-colors">LinkedIn</a></li>
+              <li><a href="https://github.com/Jay09990" target="_blank" rel="noreferrer" className="text-lg text-white hover:text-orange-500 transition-colors">GitHub</a></li>
+              <li><a href="#" className="text-lg text-white hover:text-orange-500 transition-colors">Instagram</a></li>
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Section 2 */}
           <div className="space-y-4">
-            <h4 className="text-white font-semibold">Get In Touch</h4>
-            <div className="space-y-2 text-sm">
-              <p className="text-gray-400">
-                <span className="text-orange-500">Email: </span>jdudhrejiya0990@gmail.com
-              </p>
-              <p className="text-gray-400">
-                <span className="text-orange-500">Phone:</span> +91 70419 45248
-              </p>
-              <p className="text-gray-400">
-                <span className="text-orange-500">Location:</span> Bhavnagar, Bharat
-              </p>
-            </div>
+            <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Contact</h4>
+            <ul className="space-y-2">
+              <li><a href="mailto:jdudhrejiya0990@gmail.com" className="text-lg text-white hover:text-orange-500 transition-colors">jdudhrejiya0990@gmail.com</a></li>
+              <li className="text-lg text-gray-400">+91 70419 45248</li>
+            </ul>
+          </div>
+
+          {/* Section 3 */}
+          <div className="space-y-4">
+            <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Location</h4>
+            <p className="text-lg text-gray-400">Bhavnagar, Gujarat<br />Bharat</p>
+          </div>
+
+          {/* Copyright */}
+          <div className="flex flex-col justify-end">
+            <p className="text-xs text-gray-600 uppercase tracking-wider">
+              &copy; {currentYear} Jay Dudhrejiya. <br />
+              All rights reserved.
+            </p>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-8 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} Jay Dudhrejiya. All rights reserved.
-          </p>
-          <p className="text-gray-400 text-sm flex items-center space-x-1">
-            <span>Made with</span>
-            <Heart className="w-4 h-4 text-red-500 fill-current" />
-            <span>using React & Tailwind CSS</span>
-          </p>
-        </div>
       </div>
     </footer>
   );
