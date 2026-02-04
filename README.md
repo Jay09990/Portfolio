@@ -9,7 +9,7 @@ This site showcases my projects, skills, and experience as a developer.
   Built with React and Tailwind CSS for a seamless experience on all devices.
 
 - **Project Showcase**  
-  Interactive cards highlighting my best frontend and fullstack projects.
+  Interactive cards highlighting my best frontend and fullstack git remote add projects.
 
 - **Smooth Navigation**  
   Easy-to-use navigation bar with smooth scrolling.
