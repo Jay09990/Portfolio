@@ -1,60 +1,8 @@
-# 🚀 DJ Portfolio
+# Jay Dudhrejiya
 
-Welcome to my personal portfolio website!  
-This site showcases my projects, skills, and experience as a developer.
+Personal portfolio built with React and Vite. Project details and page copy
+live in `src/content.ts`; the design uses locally hosted font files.
 
-## 🌟 Features
-
-- **Modern Responsive Design**  
-  Built with React and Tailwind CSS for a seamless experience on all devices.
-
-- **Project Showcase**  
-  Interactive cards highlighting my best frontend and fullstack git remote add projects.
-
-- **Smooth Navigation**  
-  Easy-to-use navigation bar with smooth scrolling.
-
-- **Contact Form**  
-  Reach out to me directly from the website.
-
-## 🛠️ Tech Stack
-
-- **Frontend:** React.js, Tailwind CSS, Lucide Icons
-- **Backend:** (If applicable) Node.js, Express.js, MongoDB
-- **Deployment:** Vercel
-
-## 🚧 Getting Started
-
-1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/yourusername/your-portfolio.git
-   cd your-portfolio
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Run locally:**
-   ```bash
-   npm start
-   ```
-
-4. **Build for production:**
-   ```bash
-   npm run build
-   ```
-
-## 🌐 Live Demo
-
-[View Portfolio Live](https://portfolio-theta-olive-36.vercel.app/)
-
-## 📬 Contact
-- **Email:** [jdudhrejiya0990@gmail.com](jdudhrejiya0990@gmail.com)
-- **LinkedIn:** [Your LinkedIn](https://linkedin.com/in/jdudhrejiya090)
-- **GitHub:** [Your GitHub](https://github.com/Jay09990)
-
----
-
-> Made with ❤️ by DJ
+Install dependencies with `npm install`, start the development server with
+`npm run dev`, and create a prerendered production build with `npm run build`.
+Run the code checks with `npm run lint`.
